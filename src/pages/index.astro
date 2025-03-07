@@ -1,11 +1,76 @@
 ---
 import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import "../styles/global.css";
+---
+
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
+<!-- Para comentar varias lineas es Ctrl + K + C :) -->
 
-<Layout>
+<!-- <Layout>
 	<Welcome />
-</Layout>
+</Layout> -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de Artículos</title>
+	<link href="./Styles/global.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-800 flex justify-center items-center min-h-screen">
+    <div class="bg-white w-3/4 p-6 rounded-lg shadow-lg">
+        <!-- Encabezado -->
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-xl font-bold text-gray-700">Escribe tu artículo</h1>
+            <button class="bg-teal-500 text-white px-4 py-2 rounded-lg">Publicar artículo</button>
+        </div>
+
+        <!-- Tabla de detalles -->
+        <div class="bg-gray-100 p-4 rounded-lg">
+            <table class="w-full">
+                <tbody>
+                    <tr>
+                        <td class="p-2"><label class="text-gray-600">Título del artículo</label></td>
+                        <td class="p-2"><input type="text" class="w-full p-2 border rounded-md"></td>
+                    </tr>
+                    <tr>
+                        <td class="p-2"><label class="text-gray-600">Minutos de lectura</label></td>
+                        <td class="p-2"><input type="number" class="w-full p-2 border rounded-md"></td>
+                    </tr>
+                    <tr>
+                        <td class="p-2"><label class="text-gray-600">Fecha</label></td>
+                        <td class="p-2"><input type="date" class="w-full p-2 border rounded-md"></td>
+                    </tr>
+                    <tr>
+                        <td class="p-2"><label class="text-gray-600">Estatus</label></td>
+                        <td class="p-2">
+                            <select class="w-full p-2 border rounded-md">
+                                <option>Seleccionar...</option>
+                                <option>Borrador</option>
+                                <option>Publicado</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Editor de texto -->
+        <div class="bg-white border mt-4 p-4 rounded-lg">
+            <div class="flex space-x-2 mb-2">
+                <button class="px-2 py-1 border rounded-md">B</button>
+                <button class="px-2 py-1 border rounded-md">I</button>
+                <button class="px-2 py-1 border rounded-md">U</button>
+                <button class="px-2 py-1 border rounded-md">A</button>
+            </div>
+            <textarea class="w-full h-40 border rounded-md p-2" placeholder="Escribe tu artículo..."></textarea>
+        </div>
+    </div>
+</body>
+</html>
