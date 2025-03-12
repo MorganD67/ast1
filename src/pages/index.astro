@@ -1,128 +1,128 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
 import "../styles/global.css";
 ---
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <title>Editor de Artículos</title>
-    <link href="./Styles/global.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-[#1E2A38] flex justify-center items-center min-h-screen py-4">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        <title>Editor de Artículos</title>
+        <link href="./Styles/global.css" rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            textarea {
+                resize: vertical;
+                min-height: 150px;
+                overflow-y: auto;
+            }
+        </style>
+    </head>
+    <body class="bg-[#1E2A38] flex justify-center items-center min-h-screen py-4">
 
-    <!-- Header fijo en la parte superior -->
-    <header class="w-full bg-[#1E2A38] border-t-4 border-[#01B4D2] py-3 px-6 flex items-center fixed top-0 left-0">
-        <img src="ruta-del-icono.svg" alt="Logo" class="w-8 h-8 mr-3">
-        <h1 class="text-white text-lg font-bold">iotech labs</h1>
-    </header>
+        <!-- Header -->
+        <header class="w-full bg-[#1E2A38] border-t-4 border-[#01B4D2] py-3 px-6 flex items-center fixed top-0 left-0">
+            <img src="ruta-del-icono.svg" alt="Logo" class="w-8 h-8 mr-3">
+            <h1 class="text-white text-lg font-bold">iotech labs</h1>
+        </header>
 
-    <!-- Contenedor principal -->
-    <div class="bg-[#E0E6ED] w-[98%] max-w-[1600px] max-h-[90vh] rounded-[10px] shadow-lg p-6 flex justify-center items-center overflow-hidden">
-        <!-- Contenedor del folder blanco -->
-        <div class="relative bg-white w-full h-full rounded-[15px] shadow-md p-6 pb-2 flex flex-col overflow-hidden">
-            <!-- Pestaña fija -->
-            <div class="absolute -top-6 left-6 w-36 h-8 bg-white rounded-t-[10px] 
-                clip-path-[polygon(0%_100%,_12%_0%,_100%_0%,_88%_100%)] shadow-md">
-            </div>
-    
-            <!-- Contenido con scroll -->
-            <div class="flex-1 overflow-auto px-2">
-                <!-- Encabezado -->
-                <div class="flex justify-between items-center mb-4">
-                    <h1 class="text-2xl font-bold text-gray-700" style="font-family: 'Roboto', sans-serif;">
-                        Escribe tu artículo
-                    </h1>
-                    <button class="bg-[#01B4D2] text-white px-4 py-2 rounded-full">Publicar artículo</button>
+        <!-- Contenedor principal -->
+        <div class="bg-[#E0E6ED] w-[98%] max-w-[1600px] h-[83vh] rounded-[10px] shadow-lg p-6 flex justify-center items-center overflow-hidden mt-16">
+            <div class="relative bg-white w-full h-full rounded-[15px] shadow-md p-6 pb-2 flex flex-col overflow-hidden">
+                <div class="absolute -top-6 left-6 w-36 h-8 bg-white rounded-t-[10px] 
+                    clip-path-[polygon(0%_100%,_12%_0%,_100%_0%,_88%_100%)] shadow-md">
                 </div>
-    
-                <!-- Tabla de detalles -->
-                <div class="bg-gray-100 p-4 rounded-lg">
-                    <table class="w-full">
-                        <tbody>
-                            <tr>
-                                <td class="p-2 w-1/2">
-                                    <div class="flex items-center space-x-2">
-                                        <label class="text-gray-700 text-sm flex-shrink-0 min-w-[140px]" style="font-family: 'Roboto', sans-serif;">
-                                            Título del artículo
-                                        </label>
-                                        <input type="text" class="w-full p-2 border rounded-md bg-[#D9D9D966] text-gray-700">
-                                    </div>
-                                </td>
-                                <td class="p-2 w-1/2">
-                                    <div class="flex items-center space-x-2">
-                                        <label class="text-gray-700 text-sm flex-shrink-0 min-w-[140px]" style="font-family: 'Roboto', sans-serif;">
-                                            Subtítulo del artículo
-                                        </label>
-                                        <input type="text" class="w-full p-2 border rounded-md bg-[#D9D9D966] text-gray-700">
-                                    </div>
-                                </td>
-                            </tr>                    
-    
-                            <tr>
-                                <td colspan="2" class="p-2">
-                                    <div class="grid grid-cols-3 gap-4">
-                                        <div class="flex items-center space-x-2">
-                                            <label class="text-gray-700 text-sm flex-shrink-0 min-w-[140px]" style="font-family: 'Roboto', sans-serif;">
-                                                Minutos de lectura
-                                            </label>
-                                            <input type="number" class="w-full p-2 border rounded-md bg-[#D9D9D966] text-gray-700">
-                                        </div>
-                                        <div class="flex items-center space-x-2">
-                                            <label class="text-gray-700 text-sm flex-shrink-0 min-w-[140px]" style="font-family: 'Roboto', sans-serif;">
-                                                Fecha
-                                            </label>
-                                            <input type="date" class="w-full p-2 border rounded-md bg-[#D9D9D966] text-gray-700">
-                                        </div>
-                                        <div class="flex items-center space-x-2">
-                                            <label class="text-gray-700 text-sm flex-shrink-0 min-w-[140px]" style="font-family: 'Roboto', sans-serif;">
-                                                Estatus
-                                            </label>
-                                            <select class="w-full p-2 border rounded-md bg-[#D9D9D966] text-gray-700">
-                                                <option>Seleccionar...</option>
-                                                <option>Borrador</option>
-                                                <option>Publicado</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>                    
-                        </tbody>
-                    </table>
-                </div>
-    
-                <!-- Editor de texto -->
-                <div class="bg-white border mt-4 p-4 rounded-lg">
-                    <div class="flex justify-end items-center space-x-2 mb-2 border-b pb-2 text-[#1E2A38]">
-                        <button class="px-2 py-1"><strong>Aa▼</strong></button>
-                        <span class="border-r h-5"></span>
-                        <button class="px-2 py-1 font-bold">B</button>
-                        <button class="px-2 py-1 italic">I</button>
-                        <button class="px-2 py-1">...</button>
-                        <span class="border-r h-5"></span>
-                        <button class="px-2 py-1">A▼</button>
-                        <span class="border-r h-5"></span>
-                        <button class="px-2 py-1">☰</button>
-                        <button class="px-2 py-1">☑</button>
-                        <button class="px-2 py-1">🔗</button>
-                        <button class="px-2 py-1">🖼</button>
-                        <button class="px-2 py-1">@</button>
-                        <button class="px-2 py-1">😊</button>
-                        <button class="px-2 py-1">⌨</button>
-                        <button class="px-2 py-1">&lt;/&gt;</button>
-                        <button class="px-2 py-1">+</button>
+
+                <div class="flex-1 overflow-auto px-2">
+                    <!-- Encabezado -->
+                    <div class="flex justify-between items-center mb-4">
+                        <h1 class="text-2xl font-bold text-gray-700" style="font-family: 'Roboto', sans-serif;">
+                            Escribe tu artículo
+                        </h1>
+                        <button class="bg-[#01B4D2] text-white px-4 py-2 rounded-full">Publicar artículo</button>
                     </div>
-                    <textarea class="w-full h-60 border rounded-md p-2" placeholder="Escribe tu artículo..."></textarea>
+        
+                    <!-- Tabla -->
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <table class="w-full">
+                            <tbody>
+                                <tr>
+                                    <td class="p-2 w-1/2">
+                                        <div class="flex items-center space-x-2">
+                                            <label class="text-gray-700 text-sm flex-shrink-0 min-w-[140px]" style="font-family: 'Roboto', sans-serif;">
+                                                Título del artículo
+                                            </label>
+                                            <input type="text" class="w-full p-2 border rounded-md bg-[#D9D9D966] text-gray-700">
+                                        </div>
+                                    </td>
+                                    <td class="p-2 w-1/2">
+                                        <div class="flex items-center space-x-2">
+                                            <label class="text-gray-700 text-sm flex-shrink-0 min-w-[140px]" style="font-family: 'Roboto', sans-serif;">
+                                                Subtítulo del artículo
+                                            </label>
+                                            <input type="text" class="w-full p-2 border rounded-md bg-[#D9D9D966] text-gray-700">
+                                        </div>
+                                    </td>
+                                </tr>                    
+        
+                                <tr>
+                                    <td colspan="2" class="p-2">
+                                        <div class="grid grid-cols-3 gap-4">
+                                            <div class="flex items-center space-x-2">
+                                                <label class="text-gray-700 text-sm flex-shrink-0 min-w-[140px]" style="font-family: 'Roboto', sans-serif;">
+                                                    Minutos de lectura
+                                                </label>
+                                                <input type="number" class="w-full p-2 border rounded-md bg-[#D9D9D966] text-gray-700">
+                                            </div>
+                                            <div class="flex items-center space-x-2">
+                                                <label class="text-gray-700 text-sm flex-shrink-0 min-w-[140px]" style="font-family: 'Roboto', sans-serif;">
+                                                    Fecha
+                                                </label>
+                                                <input type="date" class="w-full p-2 border rounded-md bg-[#D9D9D966] text-gray-700">
+                                            </div>
+                                            <div class="flex items-center space-x-2">
+                                                <label class="text-gray-700 text-sm flex-shrink-0 min-w-[140px]" style="font-family: 'Roboto', sans-serif;">
+                                                    Estatus
+                                                </label>
+                                                <select class="w-full p-2 border rounded-md bg-[#D9D9D966] text-gray-700">
+                                                    <option>Seleccionar...</option>
+                                                    <option>Borrador</option>
+                                                    <option>Publicado</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>                    
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Editor -->
+                    <div class="bg-white border mt-4 p-4 rounded-lg">
+                        <div class="flex justify-end items-center space-x-2 mb-2 border-b pb-2 text-[#1E2A38]">
+                            <button class="px-2 py-1"><strong>Aa▼</strong></button>
+                            <span class="border-r h-5"></span>
+                            <button class="px-2 py-1 font-bold">B</button>
+                            <button class="px-2 py-1 italic">I</button>
+                            <button class="px-2 py-1">...</button>
+                            <span class="border-r h-5"></span>
+                            <button class="px-2 py-1">A▼</button>
+                            <span class="border-r h-5"></span>
+                            <button class="px-2 py-1">☰</button>
+                            <button class="px-2 py-1">☑</button>
+                            <button class="px-2 py-1">🔗</button>
+                            <button class="px-2 py-1">🖼</button>
+                            <button class="px-2 py-1">@</button>
+                            <button class="px-2 py-1">😊</button>
+                            <button class="px-2 py-1">⌨</button>
+                            <button class="px-2 py-1">&lt;/&gt;</button>
+                            <button class="px-2 py-1">+</button>
+                        </div>
+                        <textarea class="w-full border rounded-md p-2" placeholder="Escribe tu artículo..."></textarea>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-
-</body>
+    </body>
 </html>
