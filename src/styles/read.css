@@ -1,0 +1,15 @@
+/* El archivo base.css inyectado por defecto de la integración */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tus estilos personalizados */
+button {
+    transition: all 0.3s ease-in-out;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #14b8a6; /* Color teal */
+    box-shadow: 0 0 5px rgba(20, 184, 166, 0.5);
+}
