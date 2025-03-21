@@ -11,13 +11,6 @@ import "../styles/read.css";
         <title>READ</title>
         <link href="./Styles/read.css" rel="stylesheet">
         <script src="https://cdn.tailwindcss.com"></script>
-        <style>
-            textarea {
-                resize: vertical;
-                min-height: 150px;
-                overflow-y: auto;
-            }
-        </style>
     </head>
     <body class="bg-[#1E2A38] flex justify-center items-center min-h-screen py-4">
 
@@ -31,7 +24,7 @@ import "../styles/read.css";
         <div class="bg-[#E0E6ED] w-[98%] max-w-[1600px] h-[83vh] rounded-[10px] shadow-lg p-6 flex justify-center items-center overflow-hidden mt-16">
             <div class="relative bg-white w-full h-full rounded-[15px] shadow-md p-6 pb-2 flex flex-col overflow-hidden">
                 <div class="flex-1 overflow-auto px-2">
-                <!-- 🦐 Aqui empieza lo de adento del cuadro blanco 🦐 -->
+                    <!-- 🦐 Aqui empieza lo de adento del cuadro blanco 🦐 -->
                     <!-- buscador y el botón para añadir-->
                     <div class="flex items-center justify-between">
                         <!-- Buscador -->
@@ -53,7 +46,7 @@ import "../styles/read.css";
                         <div class="overflow-auto border rounded-lg shadow-md mt-4">
                             <div class="grid grid-cols-4 bg-gray-100 px-4 py-2 font-semibold text-gray-600">
                                 <div class="flex items-center">
-                                    <input type="checkbox" class="mr-2">
+                                    <input type="checkbox" class="mr-2" id="select-all">
                                     <span>Título</span>
                                 </div>
                                 <div>Estatus</div>
@@ -64,7 +57,7 @@ import "../styles/read.css";
                             <div class="divide-y">
                                 <div class="grid grid-cols-4 px-4 py-3 items-center">
                                     <div class="flex items-center">
-                                        <input type="checkbox" class="mr-2">
+                                        <input type="checkbox" class="mr-2 item-checkbox">
                                         <span class="text-blue-600">Título del artículo</span>
                                     </div>
                                     <span class="bg-blue-100 text-blue-600 px-2 py-1 rounded-full text-xs inline-block whitespace-nowrap">
@@ -76,7 +69,7 @@ import "../styles/read.css";
                     
                                 <div class="grid grid-cols-4 px-4 py-3 items-center">
                                     <div class="flex items-center">
-                                        <input type="checkbox" class="mr-2">
+                                        <input type="checkbox" class="mr-2 item-checkbox">
                                         <span class="text-blue-600">Título del artículo</span>
                                     </div>
                                     <span class="bg-yellow-100 text-yellow-600 px-2 py-1 rounded-full text-xs inline-block whitespace-nowrap">
@@ -88,7 +81,7 @@ import "../styles/read.css";
                     
                                 <div class="grid grid-cols-4 px-4 py-3 items-center">
                                     <div class="flex items-center">
-                                        <input type="checkbox" class="mr-2">
+                                        <input type="checkbox" class="mr-2 item-checkbox">
                                         <span class="text-blue-600">Título del artículo</span>
                                     </div>
                                     <span class="bg-gray-200 text-gray-600 px-2 py-1 rounded-full text-xs inline-block whitespace-nowrap">
@@ -100,9 +93,98 @@ import "../styles/read.css";
                             </div>
                         </div>
                     </div>
-                <!-- 🦐 Aqui termina lo de adento del cuadro blanco 🦐 --> 
+                    <!-- 🦐 Aqui termina lo de adento del cuadro blanco 🦐 --> 
                 </div>             
             </div>
         </div>
+
+        <!-- Barra flotante -->
+        <div id="floating-bar">
+            <button id="cancel-button" onclick="cancelSelection()">×</button>
+            <span id="selected-count">0 Items</span>
+            <div>
+                <button onclick="editSelected()">Editar</button>
+                <button onclick="deleteSelected()">Borrar</button>
+            </div>
+        </div>
+
+        <script>
+            const checkboxes = document.querySelectorAll('.item-checkbox');
+            const floatingBar = document.getElementById('floating-bar');
+            const selectedCount = document.getElementById('selected-count');
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const selectedItems = Array.from(checkboxes).filter(cb => cb.checked);
+                    selectedCount.textContent = `${selectedItems.length} Items`;
+                    floatingBar.style.display = selectedItems.length > 0 ? 'flex' : 'none';
+                });
+            });
+
+            function editSelected() {
+                const selectedItems = Array.from(checkboxes)
+                    .filter(cb => cb.checked)
+                    .map(cb => cb.nextElementSibling.textContent);
+                alert('Editar: ' + selectedItems.join(', '));
+            }
+
+            function deleteSelected() {
+                const selectedItems = Array.from(checkboxes)
+                    .filter(cb => cb.checked)
+                    .map(cb => cb.nextElementSibling.textContent);
+                alert('Borrar: ' + selectedItems.join(', '));
+            }
+
+            function cancelSelection() {
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+                floatingBar.style.display = 'none';
+                selectedCount.textContent = '0 Items';
+            }
+        </script>
+
+        <!-- Modal para cuadrito de eliminar -->
+        <div id="deleteModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full text-center">
+                <div class="flex justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-yellow-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                </div>
+                <h2 class="text-lg font-bold text-gray-800">¿Está seguro que desea eliminar los artículos?</h2>
+                <p class="text-sm text-gray-600 mt-2">La acción será irreversible.</p>
+                <div class="mt-4 flex justify-center space-x-3">
+                    <button id="cancelDelete" class="px-4 py-2 bg-gray-300 rounded-lg text-gray-800 hover:bg-gray-400 transition">Cancelar</button>
+                    <button id="confirmDelete" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">Sí, eliminar</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const deleteModal = document.getElementById("deleteModal");
+            const cancelDelete = document.getElementById("cancelDelete");
+            const confirmDelete = document.getElementById("confirmDelete");
+            const deleteButton = document.querySelector("button[onclick='deleteSelected()']");
+
+            function deleteSelected() {
+                deleteModal.classList.remove("hidden");
+            }
+
+            cancelDelete.addEventListener("click", () => {
+                deleteModal.classList.add("hidden");
+            });
+
+            confirmDelete.addEventListener("click", () => {
+                alert("Artículos eliminados");
+                deleteModal.classList.add("hidden");
+            });
+
+            if (deleteButton) {
+                deleteButton.addEventListener("click", deleteSelected);
+            }
+        </script>
     </body>
 </html>

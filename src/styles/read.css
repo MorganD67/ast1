@@ -13,3 +13,42 @@ input:focus, textarea:focus {
     border-color: #14b8a6; /* Color teal */
     box-shadow: 0 0 5px rgba(20, 184, 166, 0.5);
 }
+
+textarea {
+    resize: vertical;
+    min-height: 150px;
+    overflow-y: auto;
+}
+/* Estilos para la barra flotante */
+#floating-bar {
+    display: none;
+    position: fixed;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #253745;
+    padding: 10px 20px;
+    border-radius: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 400px;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 14px;
+}
+#floating-bar button {
+    background-color: transparent;
+    border: none;
+    color: yellow;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+#floating-bar button:hover {
+    opacity: 0.8;
+}
+
+#cancel-button {
+    margin-right: 10px;
+}
